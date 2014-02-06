@@ -3,7 +3,7 @@ package {$package_name}.adapters;
 import java.util.ArrayList;
 import java.util.List;
 import {$package_name}.R;
-import {$package_name}.models.{$model_name}Item;
+import {$package_name}.models.{$model_name}Model;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +14,16 @@ import android.widget.BaseAdapter;
 public class {$model_name}Adapter extends BaseAdapter {
 
 	private Context mContext;
-	private List<{$model_name}Item> m{$model_name}Item;
+	private List<{$model_name}Model> m{$model_name}Model;
 	private LayoutInflater mInflator;
 
 	public {$model_name}Adapter(Context context) {
 		this(context, null);
 	}
 
-	public {$model_name}Adapter(Context context, ArrayList<{$model_name}Item> {$model_name_lower}Item) {
+	public {$model_name}Adapter(Context context, ArrayList<{$model_name}Model> {$model_name_lower}Model) {
 
-		this.m{$model_name}Item = {$model_name_lower}Item;
+		this.m{$model_name}Model = {$model_name_lower}Model;
 		this.mContext = context;
 		mInflator = LayoutInflater.from(context);
 
@@ -31,16 +31,16 @@ public class {$model_name}Adapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		if (null == m{$model_name}Item) {
+		if (null == m{$model_name}Model) {
 			return 0;
 		}
 
-		return m{$model_name}Item.size();
+		return m{$model_name}Model.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return m{$model_name}Item.get(position);
+		return m{$model_name}Model.get(position);
 	}
 
 	@Override
@@ -64,28 +64,28 @@ public class {$model_name}Adapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		{$model_name}Item {$model_name_lower}Item = ({$model_name}Item) getItem(position);
-		viewHolder.{$model_name_lower}Item = {$model_name_lower}Item;
+		{$model_name}Model {$model_name_lower}Model = ({$model_name}Model) getItem(position);
+		viewHolder.{$model_name_lower}Model = {$model_name_lower}Model;
 
 		return convertView;
 	}
 
-	public void add{$model_name}Item(List<{$model_name}Item> {$model_name_lower}Item) {
-		if (null == {$model_name_lower}Item || {$model_name_lower}Item.size() < 1) {
+	public void add{$model_name}Model(List<{$model_name}Model> {$model_name_lower}Model) {
+		if (null == {$model_name_lower}Model || {$model_name_lower}Model.size() < 1) {
 			return;
 		}
 
-		if (null == m{$model_name}Item) {
-			m{$model_name}Item = {$model_name_lower}Item;
+		if (null == m{$model_name}Model) {
+			m{$model_name}Model = {$model_name_lower}Model;
 		} else {
-			m{$model_name}Item.addAll({$model_name_lower}Item);
+			m{$model_name}Model.addAll({$model_name_lower}Model);
 		}
 
 		notifyDataSetChanged();
 	}
 
 	static class ViewHolder {
-		{$model_name}Item {$model_name_lower}Item;
+		{$model_name}Model {$model_name_lower}Model;
 
 		public ViewHolder(View v) {
 
