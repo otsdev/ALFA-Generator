@@ -5,24 +5,24 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import {$package_name}.R;
-import {$package_name}.adapters.{$model_name}Adapter;
+import {$package_name}.adapters.{$model_name}sAdapter;
 
 public class {$model_name}sActivity extends Activity {
 	private static final String TAG = "{$model_name}sActivity";
 
 	ListView lsv{$model_name};
 
-	private {$model_name}Adapter mAdapter;
+	private {$model_name}sAdapter mAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_{$model_name_lower});
+		setContentView(R.layout.activity_{$model_name_lower}s);
 
 		bindViews();
 
 	}
-
+        
 	private void bindViews() {
 		lsv{$model_name} = (ListView) findViewById(R.id.lsv_{$model_name_lower});
 

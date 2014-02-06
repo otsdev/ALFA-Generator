@@ -52,7 +52,9 @@ class ALFAGeneartor {
         $tpl->assign("model_name_lower", strtolower($this->modelName)); // assign variable
         $tpl->assign("package_name", $this->pakageName); // assign variable
         $res = $tpl->draw("AlfaActivity", true);
+
         $file_name = "src/" . str_replace(".", "/", $this->pakageName) . "/activities/" . ucfirst(strtolower($this->modelName)) . "Activity.java";
+
         $this->save_file($file_name, $res);
 
         return $file_name;
@@ -63,7 +65,9 @@ class ALFAGeneartor {
         RainTPL::$debug = true;
         $tpl->assign("model_name_lower", strtolower($this->modelName)); // assign variable            
         $res = $tpl->draw("activity_alfa", true);
+
         $file_name = "res/layout/" . "activity_" . strtolower($this->modelName) . ".xml";
+
         $this->save_file($file_name, $res);
 
         return $file_name;
