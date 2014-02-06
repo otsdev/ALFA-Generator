@@ -33,11 +33,11 @@ class ALFAGeneartor {
         $files[] = $this->generateActivityLayout();
         $files[] = $this->generateFragmentJavaCode();
         $files[] = $this->generateFragmentLayout();
-         $files[] = $this->generateAdapterJavaCode();
+        $files[] = $this->generateAdapterJavaCode();
         $files[] = $this->generateAdapterLayout();
         $zip_file = BASE_OUT_DIR . "alfa.zip";
         $this->create_zip($files, $zip_file, true);
-        
+
         header("Content-type: text/plain");
         header("Content-Disposition: attachment; filename=alfa.zip");
         $res = file_get_contents($zip_file);
@@ -52,78 +52,77 @@ class ALFAGeneartor {
         $tpl->assign("model_name_lower", strtolower($this->modelName)); // assign variable
         $tpl->assign("package_name", $this->pakageName); // assign variable
         $res = $tpl->draw("AlfaActivity", true);
-        $file_name = ALFAGeneartor::BASE_OUT_DIR . ucfirst(strtolower($this->modelName)) . "Activity.java";
+        $file_name = "src/" . str_replace(".", "/", $this->pakageName) . "/activities/" . ucfirst(strtolower($this->modelName)) . "Activity.java";
         $this->save_file($file_name, $res);
 
         return $file_name;
-    }  
+    }
 
     private function generateActivityLayout() {
-       $tpl = new raintpl(); //include Rain TPL
-        RainTPL::$debug = true;      
+        $tpl = new raintpl(); //include Rain TPL
+        RainTPL::$debug = true;
         $tpl->assign("model_name_lower", strtolower($this->modelName)); // assign variable            
         $res = $tpl->draw("activity_alfa", true);
-        $file_name = ALFAGeneartor::BASE_OUT_DIR . "activity_" .strtolower($this->modelName) . ".xml";
+        $file_name = "res/layout/" . "activity_" . strtolower($this->modelName) . ".xml";
         $this->save_file($file_name, $res);
 
-        return $file_name;  
+        return $file_name;
     }
 
     private function generateFragmentJavaCode() {
-       $tpl = new raintpl(); //include Rain TPL
+        $tpl = new raintpl(); //include Rain TPL
         RainTPL::$debug = true;
         $tpl->assign("model_name", ucfirst($this->modelName)); // assign variable
         $tpl->assign("model_name_lower", strtolower($this->modelName)); // assign variable
         $tpl->assign("package_name", $this->pakageName); // assign variable
         $res = $tpl->draw("AlfaFragment", true);
-        $file_name = ALFAGeneartor::BASE_OUT_DIR . ucfirst(strtolower($this->modelName)) . "Fragment.java";
+        $file_name = "src/" . str_replace(".", "/", $this->pakageName) . "/fragments/" . ucfirst(strtolower($this->modelName)) . "Fragment.java";
         $this->save_file($file_name, $res);
 
-        return $file_name; 
+        return $file_name;
     }
 
     private function generateFragmentLayout() {
-       $tpl = new raintpl(); //include Rain TPL
-        RainTPL::$debug = true;      
+        $tpl = new raintpl(); //include Rain TPL
+        RainTPL::$debug = true;
         $tpl->assign("model_name_lower", strtolower($this->modelName)); // assign variable            
         $res = $tpl->draw("fragment_alfa", true);
-        $file_name = ALFAGeneartor::BASE_OUT_DIR . "fragment_" .strtolower($this->modelName) . ".xml";
+        $file_name = "res/layout/" . "fragment_" . strtolower($this->modelName) . ".xml";
         $this->save_file($file_name, $res);
 
-        return $file_name; 
+        return $file_name;
     }
 
     private function generateAdapterJavaCode() {
         $tpl = new raintpl(); //include Rain TPL
-        RainTPL::$debug = true;        
+        RainTPL::$debug = true;
         $tpl->assign("model_name", ucfirst($this->modelName)); // assign variable
         $tpl->assign("model_name_lower", strtolower($this->modelName)); // assign variable
         $tpl->assign("package_name", $this->pakageName); // assign variable
         $res = $tpl->draw("AlfaAdapter", true); // draw the template
-        $file_name = ALFAGeneartor::BASE_OUT_DIR . ucfirst(strtolower($this->modelName)) . "Adapter.java";
+        $file_name = "src/" . str_replace(".", "/", $this->pakageName) . "/adapters/" . ucfirst(strtolower($this->modelName)) . "Adapter.java";
         $this->save_file($file_name, $res);
 
-        return $file_name; 
+        return $file_name;
     }
-  private function generateAdapterLayout() {
+
+    private function generateAdapterLayout() {
         $tpl = new raintpl(); //include Rain TPL
-        RainTPL::$debug = true;      
-       
+        RainTPL::$debug = true;
+
         $res = $tpl->draw("list_item_alfa", true); // draw the template
-        $file_name = ALFAGeneartor::BASE_OUT_DIR . "list_item_" .strtolower($this->modelName) . ".xml";
+        $file_name = "res/layout/" . "list_item_" . strtolower($this->modelName) . ".xml";
         $this->save_file($file_name, $res);
 
-        return $file_name; 
+        return $file_name;
     }
-    
+
     function save_file($file_name, $content) {
         if (!is_dir(dirname($file_name))) {
             // dir doesn't exist, make it
-            mkdir(dirname($file_name));
+            mkdir(dirname($file_name), 0777, true);
         }
 
-//        $current = file_get_contents($file_name);
-//        $current .= $content;
         file_put_contents($file_name, $content);
     }
 
