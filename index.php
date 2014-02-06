@@ -14,6 +14,7 @@ and open the template in the editor.
         <h1>ALFA Generator</h1>
         <form method="get" action="alfa.php">
             Model Class Name:<input type="text" name="model" />
+            Model Pakage Name:<input type="text" name="pakage" />
             <input type="submit" name="submit" value="Generate"/>
         </form>
         

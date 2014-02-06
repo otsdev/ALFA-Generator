@@ -18,9 +18,10 @@ raintpl::$cache_dir = "tmp/"; // cache directory
 class ALFAGeneartor {
 
     var $modelName;
-
-    public function ALFAGeneartor($modelName) {
+    var $pakageName;
+    public function ALFAGeneartor($modelName,$pakageName) {
         $this->modelName = $modelName;
+        $this->pakageName=$pakageName;
     }
 
     public function generateALFA() {
@@ -35,7 +36,7 @@ class ALFAGeneartor {
         $tpl->assign("model_name", $this->modelName); // assign variable
         $res = $tpl->draw("Adapter", true); // draw the template
         header("Content-type: text/plain");
-        header("Content-Disposition: attachment; filename="  . $this->modelName . ".java");
+        header("Content-Disposition: attachment; filename="  . $this->modelName . "adapter.java");
 
         print $res;
         exit;
@@ -45,7 +46,9 @@ class ALFAGeneartor {
         
         $tpl = new raintpl(); //include Rain TPL
         RainTPL::$debug = true;
-        $tpl->assign("model_name", $this->modelName); // assign variable
+        $tpl->assign("model_name", ucfirst($this->modelName)); // assign variable
+        $tpl->assign("model_name_lower", strtolower($this->modelName)); // assign variable
+        $tpl->assign("package_name", $this->pakageName); // assign variable
         $res = $tpl->draw("Adapter", true); // draw the template
         header("Content-type: text/plain");
         header("Content-Disposition: attachment; filename="  . $this->modelName . ".java");

@@ -1,30 +1,29 @@
-package com.example.adapter;
+package {$package_name}.adapters;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.example.alfa.R;
+import {$package_name}.R;
+import {$package_name}.models.{$model_name}Item;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.example.models.AlfaModel;
 
 public class {$model_name}Adapter extends BaseAdapter {
 
 	private Context mContext;
-	private List<AlfaModel> mAlfaModel;
+	private List<{$model_name}Item> m{$model_name}Item;
 	private LayoutInflater mInflator;
 
-	public AlfaAdapter(Context context) {
+	public {$model_name}Adapter(Context context) {
 		this(context, null);
 	}
 
-	public AlfaAdapter(Context context, ArrayList<AlfaModel> alfaModel) {
+	public {$model_name}Adapter(Context context, ArrayList<{$model_name}Item> {$model_name_lower}Item) {
 
-		this.mAlfaModel = alfaModel;
+		this.m{$model_name}Item = {$model_name_lower}Item;
 		this.mContext = context;
 		mInflator = LayoutInflater.from(context);
 
@@ -32,16 +31,16 @@ public class {$model_name}Adapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		if (null == mAlfaModel) {
+		if (null == m{$model_name}Item) {
 			return 0;
 		}
 
-		return mAlfaModel.size();
+		return m{$model_name}Item.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return mAlfaModel.get(position);
+		return m{$model_name}Item.get(position);
 	}
 
 	@Override
@@ -54,7 +53,7 @@ public class {$model_name}Adapter extends BaseAdapter {
 		ViewHolder viewHolder;
 
 		if (null == convertView) {
-			convertView = mInflator.inflate(R.layout.list_item_alfa, parent,
+			convertView = mInflator.inflate(R.layout.list_item_{$model_name_lower}, parent,
 					false);
 			viewHolder = new ViewHolder(convertView);
 
@@ -65,28 +64,28 @@ public class {$model_name}Adapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		AlfaModel alfaModel = (AlfaModel) getItem(position);
-		viewHolder.alfaModel = alfaModel;
+		{$model_name}Item {$model_name_lower}Item = ({$model_name}Item) getItem(position);
+		viewHolder.{$model_name_lower}Item = {$model_name_lower}Item;
 
 		return convertView;
 	}
 
-	public void addAlfaModel(List<AlfaModel> alfaModels) {
-		if (null == alfaModels || alfaModels.size() < 1) {
+	public void add{$model_name}Item(List<{$model_name}Item> {$model_name_lower}Item) {
+		if (null == {$model_name_lower}Item || {$model_name_lower}Item.size() < 1) {
 			return;
 		}
 
-		if (null == mAlfaModel) {
-			mAlfaModel = alfaModels;
+		if (null == m{$model_name}Item) {
+			m{$model_name}Item = {$model_name_lower}Item;
 		} else {
-			mAlfaModel.addAll(alfaModels);
+			m{$model_name}Item.addAll({$model_name_lower}Item);
 		}
 
 		notifyDataSetChanged();
 	}
 
 	static class ViewHolder {
-		AlfaModel alfaModel;
+		{$model_name}Item {$model_name_lower}Item;
 
 		public ViewHolder(View v) {
 
