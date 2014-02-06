@@ -5,29 +5,29 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import {$package_name}.R;
-import com.ots.alfa.adapter.AlfaAdapter;
+import {$package_name}.adapters.{$model_name}Adapter;
 
 public class {$model_name}sActivity extends Activity {
 	private static final String TAG = "{$model_name}sActivity";
 
-	ListView lsvAlfa;
+	ListView lsv{$model_name};
 
-	private AlfaAdapter mAdapter;
+	private {$model_name}Adapter mAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_alfa_{$model_name});
+		setContentView(R.layout.activity_{$model_name_lower});
 
 		bindViews();
 
 	}
 
 	private void bindViews() {
-		lsvAlfa = (ListView) findViewById(R.id.alfa_lsv);
+		lsv{$model_name} = (ListView) findViewById(R.id.lsv_{$model_name_lower});
 
-		mAdapter = new AlfaAdapter(AlfaActivity.this);
-		lsvAlfa.setAdapter(mAdapter);
+		mAdapter = new {$model_name}Adapter({$model_name}sActivity.this);
+		lsv{$model_name}.setAdapter(mAdapter);
 	}
 
 }

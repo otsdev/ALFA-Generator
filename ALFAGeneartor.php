@@ -30,7 +30,7 @@ class ALFAGeneartor {
     public function generateALFA() {
 
         $files[] = $this->generateActivityJavaCode();
-
+        $files[] = $this->generateActivityLayout();
         $zip_file = BASE_OUT_DIR . "alfa.zip";
         $this->create_zip($files, $zip_file, true);
         
@@ -44,17 +44,25 @@ class ALFAGeneartor {
     private function generateActivityJavaCode() {
         $tpl = new raintpl(); //include Rain TPL
         RainTPL::$debug = true;
-        $tpl->assign("model_name", $this->modelName);
-        $tpl->assign("package_name", $this->pakageName);
+        $tpl->assign("model_name", ucfirst($this->modelName)); // assign variable
+        $tpl->assign("model_name_lower", strtolower($this->modelName)); // assign variable
+        $tpl->assign("package_name", $this->pakageName); // assign variable
         $res = $tpl->draw("AlfaActivity", true);
         $file_name = ALFAGeneartor::BASE_OUT_DIR . $this->modelName . "Activity.java";
         $this->save_file($file_name, $res);
 
         return $file_name;
-    }
+    }  
 
     private function generateActivityLayout() {
-        
+       $tpl = new raintpl(); //include Rain TPL
+        RainTPL::$debug = true;      
+        $tpl->assign("model_name_lower", strtolower($this->modelName)); // assign variable            
+        $res = $tpl->draw("activity_alfa", true);
+        $file_name = ALFAGeneartor::BASE_OUT_DIR . "activity_" .$this->modelName . ".xml";
+        $this->save_file($file_name, $res);
+
+        return $file_name;  
     }
 
     private function generateFragmentJavaCode() {
