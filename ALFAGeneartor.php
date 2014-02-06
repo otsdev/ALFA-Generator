@@ -29,12 +29,14 @@ class ALFAGeneartor {
 
     public function generateALFA() {
 
-        $files[] = $this->generateActivityJavaCode();
-        $files[] = $this->generateActivityLayout();
+        //$files[] = $this->generateActivityJavaCode();
+       // $files[] = $this->generateActivityLayout();
         $files[] = $this->generateFragmentJavaCode();
         $files[] = $this->generateFragmentLayout();
         $files[] = $this->generateAdapterJavaCode();
         $files[] = $this->generateAdapterLayout();
+        $files[] = $this->generateActivityWithFragmentJavaCode();
+        $files[] = $this->generateActivityWithFragmentLayout();
         $zip_file = BASE_OUT_DIR . "alfa.zip";
         $this->create_zip($files, $zip_file, true);
 
@@ -112,8 +114,7 @@ class ALFAGeneartor {
 
     private function generateAdapterLayout() {
         $tpl = new raintpl(); //include Rain TPL
-        RainTPL::$debug = true;
-
+        RainTPL::$debug = true;        
         $res = $tpl->draw("list_item_alfa", true); // draw the template
         $file_name = "res/layout/" . "list_item_" . strtolower($this->modelName) . ".xml";
         $this->save_file($file_name, $res);
@@ -121,6 +122,35 @@ class ALFAGeneartor {
         return $file_name;
     }
 
+       private function generateActivityWithFragmentJavaCode() {
+         $tpl = new raintpl(); //include Rain TPL
+        RainTPL::$debug = true;
+        $tpl->assign("model_name", ucfirst($this->modelName)); // assign variable
+        $tpl->assign("model_name_lower", strtolower($this->modelName)); // assign variable
+        $tpl->assign("package_name", $this->pakageName); // assign variable
+        $res = $tpl->draw("AlfaActivityWithFragment", true);
+
+        $file_name = "src/" . str_replace(".", "/", $this->pakageName) . "/activities/" . ucfirst(strtolower($this->modelName)) . "Activity.java";
+
+        $this->save_file($file_name, $res);
+
+        return $file_name;
+    }
+
+    private function generateActivityWithFragmentLayout() {
+        $tpl = new raintpl(); //include Rain TPL
+        RainTPL::$debug = true;
+        $tpl->assign("model_name", ucfirst($this->modelName)); // assign variable
+        $tpl->assign("model_name_lower", strtolower($this->modelName)); // assign variable
+        $tpl->assign("package_name", $this->pakageName); // assign variable          
+        $res = $tpl->draw("activity_with_fragment", true);
+
+        $file_name = "res/layout/" . "activity_" . strtolower($this->modelName) . ".xml";
+
+        $this->save_file($file_name, $res);
+
+        return $file_name;
+    }
     function save_file($file_name, $content) {
         if (!is_dir(dirname($file_name))) {
             // dir doesn't exist, make it
