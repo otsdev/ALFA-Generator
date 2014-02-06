@@ -10,21 +10,9 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <?php
-        include_once './ALFAGeneartor.php';
-        
-        if(isset($_GET['submit'])) {
-            $model_name = $_GET['model'];
-            if(!empty($model_name)) { 
-                $generator = new ALFAGeneartor($modelName);
-                $generator->generateALFA();
-                
-            }
-        }
-        
-        ?>
+      
         <h1>ALFA Generator</h1>
-        <form method="get" action="index.php">
+        <form method="get" action="alfa.php">
             Model Class Name:<input type="text" name="model" />
             <input type="submit" name="submit" value="Generate"/>
         </form>

@@ -20,22 +20,24 @@ class ALFAGeneartor {
     var $modelName;
 
     public function ALFAGeneartor($modelName) {
-        $this->modelName = $modelName; 
-        
-        
+        $this->modelName = $modelName;
     }
 
     public function generateALFA() {
-        $tpl = new raintpl(); //include Rain TPL
-        RainTPL::$debug = true;
-        $tpl->assign("age", "30"); // assign variable
-        $res = $tpl->draw("test", true); // draw the template
-        echo $res;
-        
+        $this->generateActivityFiles();
     }
 
     private function generateActivityFiles() {
         
+        $tpl = new raintpl(); //include Rain TPL
+        RainTPL::$debug = true;
+        $tpl->assign("model_name", $this->modelName); // assign variable
+        $res = $tpl->draw("Adapter", true); // draw the template
+        header("Content-type: text/plain");
+        header("Content-Disposition: attachment; filename="  . $this->modelName . ".java");
+
+        print $res;
+        exit;
     }
 
 }

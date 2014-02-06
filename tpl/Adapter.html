@@ -1,0 +1,95 @@
+package com.example.adapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.alfa.R;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+
+import com.example.models.AlfaModel;
+
+public class {$model_name}Adapter extends BaseAdapter {
+
+	private Context mContext;
+	private List<AlfaModel> mAlfaModel;
+	private LayoutInflater mInflator;
+
+	public AlfaAdapter(Context context) {
+		this(context, null);
+	}
+
+	public AlfaAdapter(Context context, ArrayList<AlfaModel> alfaModel) {
+
+		this.mAlfaModel = alfaModel;
+		this.mContext = context;
+		mInflator = LayoutInflater.from(context);
+
+	}
+
+	@Override
+	public int getCount() {
+		if (null == mAlfaModel) {
+			return 0;
+		}
+
+		return mAlfaModel.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return mAlfaModel.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder viewHolder;
+
+		if (null == convertView) {
+			convertView = mInflator.inflate(R.layout.list_item_alfa, parent,
+					false);
+			viewHolder = new ViewHolder(convertView);
+
+			convertView.setTag(viewHolder);
+			convertView.setClickable(true);
+
+		} else {
+			viewHolder = (ViewHolder) convertView.getTag();
+		}
+
+		AlfaModel alfaModel = (AlfaModel) getItem(position);
+		viewHolder.alfaModel = alfaModel;
+
+		return convertView;
+	}
+
+	public void addAlfaModel(List<AlfaModel> alfaModels) {
+		if (null == alfaModels || alfaModels.size() < 1) {
+			return;
+		}
+
+		if (null == mAlfaModel) {
+			mAlfaModel = alfaModels;
+		} else {
+			mAlfaModel.addAll(alfaModels);
+		}
+
+		notifyDataSetChanged();
+	}
+
+	static class ViewHolder {
+		AlfaModel alfaModel;
+
+		public ViewHolder(View v) {
+
+		}
+	}
+}
