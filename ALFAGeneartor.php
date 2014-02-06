@@ -24,10 +24,24 @@ class ALFAGeneartor {
     }
 
     public function generateALFA() {
-        $this->generateActivityFiles();
+        $this->generateAdapter();
+        
     }
 
-    private function generateActivityFiles() {
+    private function generateActivity() {
+        
+        $tpl = new raintpl(); //include Rain TPL
+        RainTPL::$debug = true;
+        $tpl->assign("model_name", $this->modelName); // assign variable
+        $res = $tpl->draw("Adapter", true); // draw the template
+        header("Content-type: text/plain");
+        header("Content-Disposition: attachment; filename="  . $this->modelName . ".java");
+
+        print $res;
+        exit;
+    }
+    
+    private function generateAdapter() {
         
         $tpl = new raintpl(); //include Rain TPL
         RainTPL::$debug = true;
