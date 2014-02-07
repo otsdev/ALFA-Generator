@@ -1,0 +1,33 @@
+package {$package_name}.activities;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ListView;
+
+import {$package_name}.R;
+import com.ots.alfa.adapter.AlfaAdapter;
+
+public class {$model_name}sActivity extends Activity {
+	private static final String TAG = "{$model_name}sActivity";
+
+	ListView lsvAlfa;
+
+	private AlfaAdapter mAdapter;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_alfa_{$model_name});
+
+		bindViews();
+
+	}
+
+	private void bindViews() {
+		lsvAlfa = (ListView) findViewById(R.id.alfa_lsv);
+
+		mAdapter = new AlfaAdapter(AlfaActivity.this);
+		lsvAlfa.setAdapter(mAdapter);
+	}
+
+}

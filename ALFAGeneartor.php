@@ -28,20 +28,18 @@ class ALFAGeneartor {
     }
 
     public function generateALFA() {
-        $this->generateAdapter();
-//        $content = $this->generateActivity();
-//        $file_name = ALFAGeneartor::BASE_OUT_DIR . $this->modelName . "Adapter.java";
-//        $this->save_file($file_name, $content);
+        $this->generateActivity();
     }
 
     private function generateActivity() {
-
         $tpl = new raintpl(); //include Rain TPL
         RainTPL::$debug = true;
-        $tpl->assign("model_name", $this->modelName); // assign variable
-        $res = $tpl->draw("Adapter", true); // draw the template
+        $tpl->assign("model_name", $this->modelName);
+        $tpl->assign("package_name", $this->pakageName);
+        $res = $tpl->draw("AlfaActivity", true);
+        $file_name = ALFAGeneartor::BASE_OUT_DIR . $this->modelName . "Activity.java";
+        $this->save_file($file_name, $res);
 
-        return $res;
     }
 
     private function generateAdapter() {
@@ -60,9 +58,14 @@ class ALFAGeneartor {
     }
 
     function save_file($file_name, $content) {
-        $current = file_get_contents($file_name);
-        $current .= $content;
-        file_put_contents($file_name, $current);
+        if (!is_dir(dirname($file_name))) {
+            // dir doesn't exist, make it
+            mkdir(dirname($file_name));
+        }
+
+//        $current = file_get_contents($file_name);
+//        $current .= $content;
+        file_put_contents($file_name, $content);
     }
 
     /* creates a compressed zip file */
