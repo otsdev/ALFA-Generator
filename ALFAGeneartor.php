@@ -28,10 +28,20 @@ class ALFAGeneartor {
     }
 
     public function generateALFA() {
-        $this->generateActivity();
+
+        $files[] = $this->generateActivityJavaCode();
+
+        $zip_file = BASE_OUT_DIR . "alfa.zip";
+        $this->create_zip($files, $zip_file, true);
+        
+        header("Content-type: text/plain");
+        header("Content-Disposition: attachment; filename=alfa.zip");
+        $res = file_get_contents($zip_file);
+        print $res;
+        exit;
     }
 
-    private function generateActivity() {
+    private function generateActivityJavaCode() {
         $tpl = new raintpl(); //include Rain TPL
         RainTPL::$debug = true;
         $tpl->assign("model_name", $this->modelName);
@@ -40,9 +50,22 @@ class ALFAGeneartor {
         $file_name = ALFAGeneartor::BASE_OUT_DIR . $this->modelName . "Activity.java";
         $this->save_file($file_name, $res);
 
+        return $file_name;
     }
 
-    private function generateAdapter() {
+    private function generateActivityLayout() {
+        
+    }
+
+    private function generateFragmentJavaCode() {
+        
+    }
+
+    private function generateFragmentLayout() {
+        
+    }
+
+    private function generateAdapterJavaCode() {
         $tpl = new raintpl(); //include Rain TPL
         RainTPL::$debug = true;
         $tpl->assign("model_name", strtolower($this->modelName)); // assign variable
