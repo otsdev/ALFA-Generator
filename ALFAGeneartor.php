@@ -18,17 +18,20 @@ raintpl::$cache_dir = "tmp/"; // cache directory
 class ALFAGeneartor {
 
     var $modelName;
+    var $pakageName;
 
     const BASE_OUT_DIR = "out/";
 
-    public function ALFAGeneartor($modelName) {
+    public function ALFAGeneartor($modelName, $pakageName) {
         $this->modelName = $modelName;
+        $this->pakageName = $pakageName;
     }
 
     public function generateALFA() {
-        $content = $this->generateActivity();
-        $file_name = ALFAGeneartor::BASE_OUT_DIR . $this->modelName . "Adapter.java";
-        $this->save_file($file_name, $content);
+        $this->generateAdapter();
+//        $content = $this->generateActivity();
+//        $file_name = ALFAGeneartor::BASE_OUT_DIR . $this->modelName . "Adapter.java";
+//        $this->save_file($file_name, $content);
     }
 
     private function generateActivity() {
@@ -42,10 +45,12 @@ class ALFAGeneartor {
     }
 
     private function generateAdapter() {
-
         $tpl = new raintpl(); //include Rain TPL
         RainTPL::$debug = true;
         $tpl->assign("model_name", strtolower($this->modelName)); // assign variable
+        $tpl->assign("model_name", ucfirst($this->modelName)); // assign variable
+        $tpl->assign("model_name_lower", strtolower($this->modelName)); // assign variable
+        $tpl->assign("package_name", $this->pakageName); // assign variable
         $res = $tpl->draw("Adapter", true); // draw the template
         header("Content-type: text/plain");
         header("Content-Disposition: attachment; filename=" . $this->modelName . ".java");
@@ -58,7 +63,6 @@ class ALFAGeneartor {
         $current = file_get_contents($file_name);
         $current .= $content;
         file_put_contents($file_name, $current);
-        
     }
 
     /* creates a compressed zip file */
