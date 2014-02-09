@@ -19,24 +19,35 @@ class ALFAGeneartor {
 
     var $modelName;
     var $pakageName;
-
+    var $isgeneratefile;
+    
     const BASE_OUT_DIR = "out/";
 
-    public function ALFAGeneartor($modelName, $pakageName) {
+    public function ALFAGeneartor($modelName, $pakageName,$isgeneratefile) {
         $this->modelName = $modelName;
         $this->pakageName = $pakageName;
+        $this->isgeneratefile = $isgeneratefile;
     }
 
     public function generateALFA() {
-
-        //$files[] = $this->generateActivityJavaCode();
-       // $files[] = $this->generateActivityLayout();
+        
+        if($this->isgeneratefile=="generatefragment")
+        {
+            $files[] = $this->generateActivityWithFragmentJavaCode();
+            $files[] = $this->generateActivityWithFragmentLayout();
+      
+        }
+        else
+        { 
+            $files[] = $this->generateActivityJavaCode();
+            $files[] = $this->generateActivityLayout();
+    
+        }
         $files[] = $this->generateFragmentJavaCode();
         $files[] = $this->generateFragmentLayout();
         $files[] = $this->generateAdapterJavaCode();
         $files[] = $this->generateAdapterLayout();
-        $files[] = $this->generateActivityWithFragmentJavaCode();
-        $files[] = $this->generateActivityWithFragmentLayout();
+       
         $zip_file = BASE_OUT_DIR . "alfa.zip";
         $this->create_zip($files, $zip_file, true);
 
