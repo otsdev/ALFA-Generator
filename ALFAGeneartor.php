@@ -34,7 +34,7 @@ class ALFAGeneartor {
     const FRAGMENT_EXTENTION = "Fragment.java";
     const FRAGMENT_FOLDER = "/fragments/";
     const FRAGMENT_LAYOUT_FOLDER = "fragment_";
-    const ADAPTER_EXTENTION = "Adapter.java";
+    const ADAPTER_EXTENTION = "sAdapter.java";
     const ADAPTER_FOLDER = "/adapters/";
     const ADAPTER_LAYOUT_FOLDER = "list_item_";
 
