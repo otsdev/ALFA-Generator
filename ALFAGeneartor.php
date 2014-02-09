@@ -19,10 +19,12 @@ class ALFAGeneartor {
 
     var $modelName;
     var $pakageName;
-    var $isgeneratefile;
+    var $isgeneratefragment;
+    var $isgenerateactivity;
 
     const BASE_OUT_DIR = "out/";
     const GENERATE_FRAGMENT = "generatefragment";
+    const GENERATE_ACTIVITY = "generateactivity";
     const LAYOUT_PATH = "res/layout/";
     const JAVA_CODE_PATH = "src/";
     const LAYOUT_EXTENTION = ".xml";
@@ -36,22 +38,34 @@ class ALFAGeneartor {
     const ADAPTER_FOLDER = "/adapters/";
     const ADAPTER_LAYOUT_FOLDER = "list_item_";
 
-    public function ALFAGeneartor($modelName, $pakageName, $isgeneratefile) {
+    public function ALFAGeneartor($modelName, $pakageName, $isgeneratefragment, $isgenerateactivity) {
         $this->modelName = $modelName;
         $this->pakageName = $pakageName;
-        $this->isgeneratefile = $isgeneratefile;
+        $this->isgeneratefragment = $isgeneratefragment;
+        $this->isgenerateactivity = $isgenerateactivity;
     }
 
     public function generateALFA() {
 
 
+        if ($this->isgeneratefragment == ALFAGeneartor::GENERATE_FRAGMENT && $this->isgenerateactivity == ALFAGeneartor::GENERATE_ACTIVITY) {
+            $files[] = $this->generateActivityJavaCode(TRUE);
+            $files[] = $this->generateActivityLayout(TRUE);
+            $files[] = $this->generateFragmentJavaCode();
+            $files[] = $this->generateFragmentLayout();
+        }
+        elseif  ($this->isgenerateactivity == ALFAGeneartor::GENERATE_ACTIVITY) {
+            $files[] = $this->generateActivityJavaCode(FALSE);
+            $files[] = $this->generateActivityLayout(FALSE);
+        }
+        elseif ($this->isgeneratefragment == ALFAGeneartor::GENERATE_FRAGMENT) {
+            $files[] = $this->generateFragmentJavaCode();        
+            $files[] = $this->generateFragmentLayout();
+        }
 
-        $files[] = $this->generateActivityJavaCode($this->isgeneratefile == ALFAGeneartor::GENERATE_FRAGMENT);
-        $files[] = $this->generateActivityLayout($this->isgeneratefile == ALFAGeneartor::GENERATE_FRAGMENT);
 
 
-        $files[] = $this->generateFragmentJavaCode();
-        $files[] = $this->generateFragmentLayout();
+        
         $files[] = $this->generateAdapterJavaCode();
         $files[] = $this->generateAdapterLayout();
 
