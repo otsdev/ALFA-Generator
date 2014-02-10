@@ -28,7 +28,7 @@ class ALFAGeneartor {
     const LAYOUT_PATH = "res/layout/";
     const JAVA_CODE_PATH = "src/";
     const LAYOUT_EXTENTION = ".xml";
-    const ACTIVIY_EXTENTION = "Activity.java";
+    const ACTIVIY_EXTENTION = "sActivity.java";
     const ACTIVIY_FOLDER = "/activities/";
     const ACTIVIY_LAYOUT_FOLDER = "activity_";
     const FRAGMENT_EXTENTION = "Fragment.java";
