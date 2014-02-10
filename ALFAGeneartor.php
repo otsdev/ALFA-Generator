@@ -20,9 +20,9 @@ class ALFAGeneartor {
     var $modelName;
     var $pakageName;
     var $isgeneratefile;
-    
+
     const BASE_OUT_DIR = "out/";
-    const GENERATE_FRAGMENT="generatefragment";
+    const GENERATE_FRAGMENT = "generatefragment";
     const LAYOUT_PATH = "res/layout/";
     const JAVA_CODE_PATH = "src/";
     const LAYOUT_EXTENTION = ".xml";
@@ -36,26 +36,26 @@ class ALFAGeneartor {
     const ADAPTER_FOLDER = "/adapters/";
     const ADAPTER_LAYOUT_FOLDER = "list_item_";
 
-    public function ALFAGeneartor($modelName, $pakageName,$isgeneratefile) {
+    public function ALFAGeneartor($modelName, $pakageName, $isgeneratefile) {
         $this->modelName = $modelName;
         $this->pakageName = $pakageName;
         $this->isgeneratefile = $isgeneratefile;
     }
 
     public function generateALFA() {
-        
-       
-            
-        $files[] = $this->generateActivityJavaCode($this->isgeneratefile==ALFAGeneartor::GENERATE_FRAGMENT);
-        $files[] = $this->generateActivityLayout($this->isgeneratefile==ALFAGeneartor::GENERATE_FRAGMENT);
-      
-       
+
+
+
+        $files[] = $this->generateActivityJavaCode($this->isgeneratefile == ALFAGeneartor::GENERATE_FRAGMENT);
+        $files[] = $this->generateActivityLayout($this->isgeneratefile == ALFAGeneartor::GENERATE_FRAGMENT);
+
+
         $files[] = $this->generateFragmentJavaCode();
         $files[] = $this->generateFragmentLayout();
         $files[] = $this->generateAdapterJavaCode();
         $files[] = $this->generateAdapterLayout();
-       
-        $zip_file = BASE_OUT_DIR . "alfa.zip";
+
+        $zip_file = ALFAGeneartor::BASE_OUT_DIR . "alfa.zip";
         $this->create_zip($files, $zip_file, true);
 
         header("Content-type: text/plain");
@@ -71,19 +71,13 @@ class ALFAGeneartor {
         $tpl->assign("model_name", ucfirst($this->modelName)); // assign variable
         $tpl->assign("model_name_lower", strtolower($this->modelName)); // assign variable
         $tpl->assign("package_name", $this->pakageName); // assign variable
-        if($isHasFragment)       
-            {            
-            $res = $tpl->draw("AlfaActivityWithFragment", true);       
-            
-            }        
-        
-        else 
-            {     
+        if ($isHasFragment) {
+            $res = $tpl->draw("AlfaActivityWithFragment", true);
+        } else {
             $res = $tpl->draw("AlfaActivity", true);
-     
-            }
-           
-         
+        }
+
+
         $file_name = ALFAGeneartor::JAVA_CODE_PATH . $this->path_replace() . ALFAGeneartor::ACTIVIY_FOLDER . ucfirst(strtolower($this->modelName)) . ALFAGeneartor::ACTIVIY_EXTENTION;
 
         $this->save_file($file_name, $res);
@@ -94,26 +88,21 @@ class ALFAGeneartor {
     private function generateActivityLayout($isHasFragment) {
         $tpl = new raintpl(); //include Rain TPL
         RainTPL::$debug = true;
-         $tpl->assign("model_name", ucfirst($this->modelName)); // assign variable
+        $tpl->assign("model_name", ucfirst($this->modelName)); // assign variable
         $tpl->assign("model_name_lower", strtolower($this->modelName)); // assign variable
         $tpl->assign("package_name", $this->pakageName); // assign variable            
-        if($isHasFragment)
-        {
-             $res = $tpl->draw("activity_with_fragment", true);
-        }        
- 
-        else 
-            {
+        if ($isHasFragment) {
+            $res = $tpl->draw("activity_with_fragment", true);
+        } else {
             $res = $tpl->draw("activity_alfa", true);
-            }
-        $file_name = ALFAGeneartor::LAYOUT_PATH . ALFAGeneartor::ACTIVIY_LAYOUT_FOLDER  . strtolower($this->modelName) . ALFAGeneartor::LAYOUT_EXTENTION;
+        }
+        $file_name = ALFAGeneartor::LAYOUT_PATH . ALFAGeneartor::ACTIVIY_LAYOUT_FOLDER . strtolower($this->modelName) . ALFAGeneartor::LAYOUT_EXTENTION;
 
         $this->save_file($file_name, $res);
 
         return $file_name;
     }
 
- 
     private function generateFragmentJavaCode() {
         $tpl = new raintpl(); //include Rain TPL
         RainTPL::$debug = true;
@@ -153,14 +142,15 @@ class ALFAGeneartor {
 
     private function generateAdapterLayout() {
         $tpl = new raintpl(); //include Rain TPL
-        RainTPL::$debug = true;        
+        RainTPL::$debug = true;
         $res = $tpl->draw("list_item_alfa", true); // draw the template
         $file_name = ALFAGeneartor::LAYOUT_PATH . ALFAGeneartor::ADAPTER_LAYOUT_FOLDER . strtolower($this->modelName) . ALFAGeneartor::LAYOUT_EXTENTION;
         $this->save_file($file_name, $res);
 
         return $file_name;
     }
-     function save_file($file_name, $content) {
+
+    function save_file($file_name, $content) {
         if (!is_dir(dirname($file_name))) {
             // dir doesn't exist, make it
             mkdir(dirname($file_name), 0777, true);
@@ -172,6 +162,11 @@ class ALFAGeneartor {
     /* creates a compressed zip file */
 
     function create_zip($files = array(), $destination = '', $overwrite = false) {
+        if (!is_dir(dirname($destination))) {
+            // dir doesn't exist, make it
+            mkdir(dirname($destination), 0777, true);
+        }
+
         //if the zip file already exists and overwrite is false, return false
         if (file_exists($destination) && !$overwrite) {
             return false;
@@ -210,11 +205,11 @@ class ALFAGeneartor {
             return false;
         }
     }
-    
- private function path_replace() {
-     
-     $newstr= str_replace(".", "/", $this->pakageName);    
-     return $newstr;
-      
+
+    private function path_replace() {
+
+        $newstr = str_replace(".", "/", $this->pakageName);
+        return $newstr;
     }
+
 }
