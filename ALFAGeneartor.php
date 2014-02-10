@@ -43,12 +43,8 @@ class ALFAGeneartor {
     }
 
     public function generateALFA() {
-
-
-
         $files[] = $this->generateActivityJavaCode($this->isgeneratefile == ALFAGeneartor::GENERATE_FRAGMENT);
         $files[] = $this->generateActivityLayout($this->isgeneratefile == ALFAGeneartor::GENERATE_FRAGMENT);
-
 
         $files[] = $this->generateFragmentJavaCode();
         $files[] = $this->generateFragmentLayout();
