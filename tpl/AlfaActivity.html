@@ -26,7 +26,7 @@ public class {$model_name}sActivity extends Activity {
 	private void bindViews() {
 		lsv{$model_name} = (ListView) findViewById(R.id.lsv_{$model_name_lower}s);
 
-		mAdapter = new {$model_name}Adapter({$model_name}sActivity.this);
+		mAdapter = new {$model_name}sAdapter({$model_name}sActivity.this);
 		lsv{$model_name}.setAdapter(mAdapter);
 	}
 

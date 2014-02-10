@@ -28,6 +28,7 @@ class ALFAGeneartor {
     const LAYOUT_PATH = "res/layout/";
     const JAVA_CODE_PATH = "src/";
     const LAYOUT_EXTENTION = "s.xml";
+    const LAYOUT_SINGLE_EXTNSION = ".xml";
     const ACTIVIY_EXTENTION = "sActivity.java";
     const ACTIVIY_FOLDER = "/activities/";
     const ACTIVIY_LAYOUT_FOLDER = "activity_";
@@ -46,7 +47,7 @@ class ALFAGeneartor {
     }
 
     public function generateALFA() {
-        if (    $this->isgeneratefragment == ALFAGeneartor::GENERATE_FRAGMENT &&
+        if ($this->isgeneratefragment == ALFAGeneartor::GENERATE_FRAGMENT &&
                 $this->isgenerateactivity == ALFAGeneartor::GENERATE_ACTIVITY) {
             $files[] = $this->generateActivityJavaCode(TRUE);
             $files[] = $this->generateActivityLayout(TRUE);
@@ -66,7 +67,7 @@ class ALFAGeneartor {
         $zip_file = ALFAGeneartor::BASE_OUT_DIR . "alfa.zip";
         $this->create_zip($files, $zip_file, true);
 
-        header("Content-type: text/plain");
+        header("Content-type: application/zip");
         header("Content-Disposition: attachment; filename=alfa.zip");
         $res = file_get_contents($zip_file);
         print $res;
@@ -152,7 +153,7 @@ class ALFAGeneartor {
         $tpl = new raintpl(); //include Rain TPL
         RainTPL::$debug = true;
         $res = $tpl->draw("list_item_alfa", true); // draw the template
-        $file_name = ALFAGeneartor::LAYOUT_PATH . ALFAGeneartor::ADAPTER_LAYOUT_FOLDER . strtolower($this->modelName) . ALFAGeneartor::LAYOUT_EXTENTION;
+        $file_name = ALFAGeneartor::LAYOUT_PATH . ALFAGeneartor::ADAPTER_LAYOUT_FOLDER . strtolower($this->modelName) . ALFAGeneartor::LAYOUT_SINGLE_EXTNSION;
         $this->save_file($file_name, $res);
 
         return $file_name;
