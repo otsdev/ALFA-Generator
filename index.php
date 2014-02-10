@@ -16,8 +16,11 @@ and open the template in the editor.
             Model Class Name:<input type="text" name="model" />
             <br />
             Model Pakage Name:<input type="text" name="pakage" />
+            <br />            
+            Generate Fragment:<input type="checkbox" name="generatefragment" value="generatefragment" />
             <br />
             <input type="submit" name="submit" value="Generate"/>
+           
         </form>
         
     </body>
