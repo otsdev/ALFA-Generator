@@ -10,7 +10,7 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-      
+
         <h1>ALFA Generator</h1>
         <form method="get" action="alfa.php">
             Model Class Name:<input type="text" name="model" />
@@ -18,10 +18,13 @@ and open the template in the editor.
             Model Pakage Name:<input type="text" name="pakage" />
             <br />            
             Generate Fragment:<input type="checkbox" name="generatefragment" value="generatefragment" />
-            <br />
+
+            <br />            
+            Generate Activity:<input type="checkbox" name="generateactivity" value="generateactivity" />
+            <br />       
             <input type="submit" name="submit" value="Generate"/>
-           
+
         </form>
-        
+
     </body>
 </html>
