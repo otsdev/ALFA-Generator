@@ -8,23 +8,30 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title></title>
+        <style>
+           table td { border: none 1px}
+        </style>
     </head>
     <body>
 
-        <h1>ALFA Generator</h1>
-        <form method="get" action="alfa.php">
-            Model Class Name:<input type="text" name="model" />
-            <br />
-            Model Pakage Name:<input type="text" name="pakage" />
-            <br />            
-            Generate Fragment:<input type="checkbox" name="generatefragment" value="generatefragment" />
+        <h1 style="text-align: center">ALFA Generator</h1>
 
-            <br />            
-            Generate Activity:<input type="checkbox" name="generateactivity" value="generateactivity" />
-            <br />       
-            <input type="submit" name="submit" value="Generate"/>
 
-        </form>
+        <fieldset style="width: 500px;margin: 0 auto;">
+            <form method="get" action="alfa.php">
+             
+                <table style="width: 100%;">
+                    <tr><td>Model Class Name:</td><td style="text-align: left"><input type="text" name="model" /></td></tr>
+                    <tr><td>Pakage Name:</td><td> <input type="text" name="pakage" /></td></tr>
+                    <tr><td>Generate Fragment:</td><td>  <input type="checkbox" name="generatefragment" value="generatefragment" /></td></tr>
+                    <tr><td>Generate Activity:</td><td> <input type="checkbox" name="generateactivity" value="generateactivity" /></td></tr>
+                    <tr><td colspan="2"> <input style="float: right" type="submit" name="submit" value="Generate"/></td></tr>
+         
+                </table>
 
+                
+
+            </form>
+        </fieldset>
     </body>
 </html>
