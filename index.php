@@ -21,8 +21,8 @@ and open the template in the editor.
             <form method="get" action="alfa.php">
              
                 <table style="width: 100%;">
-                    <tr><td>Model Class Name:</td><td style="text-align: left"><input type="text" name="model" /></td></tr>
-                    <tr><td>Pakage Name:</td><td> <input type="text" name="pakage" /></td></tr>
+                    <tr><td>Model Class Name:</td><td style="text-align: left"><input type="text" name="model"  placeholder="Model" /></td></tr>
+                    <tr><td>Pakage Name:</td><td> <input type="text" name="pakage"  placeholder="com.example.appname"/></td></tr>
                     <tr><td>Generate Fragment:</td><td>  <input type="checkbox" name="generatefragment" value="generatefragment" /></td></tr>
                     <tr><td>Generate Activity:</td><td> <input type="checkbox" name="generateactivity" value="generateactivity" /></td></tr>
                     <tr><td colspan="2"> <input style="float: right" type="submit" name="submit" value="Generate"/></td></tr>
