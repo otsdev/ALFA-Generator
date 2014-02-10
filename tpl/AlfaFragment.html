@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import {$package_name}.R;
-import {$package_name}.adapters.{$model_name}Adapter;
+import {$package_name}.adapters.{$model_name}sAdapter;
 
 public class {$model_name}sFragment extends Fragment {
 	private static final String TAG = "{$model_name}sFragment";
 
 	ListView lsv{$model_name};
 
-	private {$model_name}Adapter mAdapter;
+	private {$model_name}sAdapter mAdapter;
 	View layout = null;
 
 	@Override
@@ -30,7 +30,7 @@ public class {$model_name}sFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		layout = (ViewGroup) inflater.inflate(R.layout.fragment_{$model_name_lower},
+		layout = (ViewGroup) inflater.inflate(R.layout.fragment_{$model_name_lower}s,
 				container, false);
 
 		bindViews(layout);
@@ -39,7 +39,7 @@ public class {$model_name}sFragment extends Fragment {
 	}
 
 	public void bindViews(View layout) {
-		mAdapter = new {$model_name}Adapter(getActivity());
+		mAdapter = new {$model_name}sAdapter(getActivity());
 		lsv{$model_name} = (ListView) layout.findViewById(R.id.lsv_{$model_name_lower});
 		lsv{$model_name}.setAdapter(mAdapter);
 
